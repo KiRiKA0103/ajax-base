@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        .box {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="./angle.gif" alt="">
+    </div>
+
+</body>
+<script>
+    $(function () {
+        var timer = null;
+        $(document).mousemove(function (e) {
+            if (timer) {
+                return;
+            }
+            timer = setTimeout(function () {
+                $('.box').css('left', e.pageX + 'px').css('top', e.pageY + 'px');
+                timer = null;
+            }, 16)
+        })
+    })
+</script>
+
+</html>

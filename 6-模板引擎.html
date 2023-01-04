@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <script src="./template-web.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+
+</body>
+<script type="text/html" id="tp-user">
+    <h1>{{uname}}</h1>
+    {{@ test}}
+    <span>注册时间:{{regTime | dateFormat}}</span>
+    <div>
+        <!-- 条件输出 -->
+        {{if flag===0}}
+        flag is 0
+        {{else if flag===1}}
+        flag is 1
+        {{/if}}
+    </div>
+    <ul>
+        {{each arr}}
+        <li>{{$index}}---{{$value}}</li>
+        {{/each}}
+    </ul>
+</script>
+<script>
+    $(function () {
+        var data = {
+            uname: '张三',
+            test: '<span>span标签</span>',
+            flag: 0,
+            arr: ['吃屎', '答辩', '压缩毛巾'],
+            regTime: new Date()
+        };
+        template.defaults.imports.dateFormat = function (date) {
+            let y = date.getFullYear()
+            let m = date.getMonth() + 1;
+            m = m < 10 ? '0' + m : m
+            let d = date.getDate()
+            d = d < 10 ? '0' + d : d
+            return y + '-' + m + '-' + d;
+        }
+        var htmlStr = template('tp-user', data);
+        $('.container').html(htmlStr);
+    })
+
+</script>
+
+</html>

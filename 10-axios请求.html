@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.js"></script>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <button id="btn1">发送GET请求</button>
+    <button id="btn2">发送POST请求</button>
+    <button id="btn3">发送GET请求</button>
+    <button id="btn4">发送POST请求</button>
+
+</body>
+<script>
+    $(function () {
+        $('#btn1').click(function () {
+            let url = 'http://www.liulongbin.top:3006/api/get';
+            let paramObj = { name: '张三', age: 30 };
+            axios.get(url, { params: paramObj }).then(res=>{
+                console.log(res.data);
+            }).catch(err=>console.log(err))
+        })
+        $('#btn2').click(function () {
+            let url = 'http://www.liulongbin.top:3006/api/post';
+            let dataObj = { address: '北京', location:'顺义区' };
+            axios.post(url, dataObj).then(res=>{
+                console.log(res.data);
+            }).catch(err=>console.log(err))
+        })
+        $('#btn3').click(function () {
+            let url = 'http://www.liulongbin.top:3006/api/get';
+            let paramObj = { name: '张三', age: 30 };
+            axios({
+                method:'GET',
+                url:url,
+                params:paramObj
+            }).then(res=>console.log(res.data)).catch(err=>console.log(err))
+        })
+        $('#btn4').click(function () {
+            let url = 'http://www.liulongbin.top:3006/api/post';
+            let dataObj = { address: '北京', location:'顺义区' };
+            axios({
+                method:'POST',
+                url:url,
+                data:dataObj
+            }).then(res=>console.log(res.data)).catch(err=>console.log(err))
+        })
+
+    })
+
+</script>
+
+</html>

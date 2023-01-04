@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <script src="./template-web.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .main {
+            width: 720px;
+            margin: 0 auto;
+        }
+
+        .news-item {
+            width: 100%;
+            height: 180px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .img-box {
+            float: left;
+            width: 240px;
+            height: 100%;
+            margin-right: 15px;
+            background-color: pink;
+        }
+        .img-box img{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .content-box .title {
+            margin-bottom: 5px;
+        }
+
+        .tags,
+        .time {
+            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <ul class="news-list">
+        </ul>
+    </div>
+
+</body>
+<script type="text/html" id="tp-news">
+    {{each dataList}}
+    <li class="news-item">
+        <div class="img-box">
+        </div>
+        <div class="content-box">
+            <h4 class="title">{{$value.title}}</h4>
+            <ul class="tags">
+                {{$value.all_category_names | getTags}}
+            </ul>
+            <p class="time">{{$value.pub_date | dateFormat}}</p>
+        </div>
+
+    </li>
+    {{/each}}
+</script>
+<script>
+    $(function () {
+        template.defaults.imports.dateFormat = function (date) {
+            dayStr = date.split('T')[0];
+            timeStr = date.split('T')[1].split('+')[0]
+            return dayStr + ' ' + timeStr;
+        }
+        template.defaults.imports.getTags = function (tags) {
+            return tags.split(',').join(' ');
+        }
+        $.get('https://www.nippon.com/api/search/hk/category_code/20/1/news?t=1672584343386', function (res) {
+            let data = JSON.parse(res).body;
+            console.log(data);
+            var htmlStr = template('tp-news', data);
+            $('.news-list').html(htmlStr);
+
+
+        })
+
+
+    })
+
+</script>
+
+</html>

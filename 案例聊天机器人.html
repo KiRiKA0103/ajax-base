@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .main {
+            position: relative;
+            max-width: 720px;
+            min-height: 100%;
+            margin: 0 auto;
+            background-color: pink;
+        }
+
+        section {
+            overflow: hidden;
+        }
+
+        footer {
+            width: 720px;
+            height: 50px;
+            position: fixed;
+            bottom: 0;
+            background-color: skyblue;
+        }
+
+        input {
+            width: 640px;
+            height: 32px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            outline: none;
+            border: none;
+            font-size: 24px;
+            padding-left: 5px;
+            margin-left: 10px;
+            background-color: #fff;
+            color: peru;
+        }
+
+        button {
+            position: relative;
+            top: 6px;
+            box-sizing: content-box;
+            outline: none;
+            border: none;
+            height: 32px;
+            width: 48px;
+        }
+
+        span {
+            display: block;
+            border-radius: 5px;
+            padding: 7px;
+            margin: 10px 0;
+            width: 560px;
+            background-color: #fff;
+            font-size: 20px;
+        }
+
+        .robot {
+            float: left;
+            margin-left: 10px;
+            color: blueviolet;
+        }
+
+        .player {
+            float: right;
+            margin-right: 10px;
+            color: peru;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="main">
+        <section>
+            <span class="robot">
+
+            </span>
+            <span class="player">
+
+            </span>
+        </section>
+        <footer>
+            <input type="text">
+            <button>发送</button>
+        </footer>
+
+    </div>
+
+</body>
+<script src="./jquery.js"></script>
+<script>
+    $(function () {
+        jQuery.support.cors = true;
+        $('button').on('click', function () {
+            let text = $('input').val().trim();
+            $('section').append('<span class="player">' + text + '</span>');
+            $('input').val('');
+            $.ajax({
+                type: 'GET',
+                url: 'https://api.ownthink.com/bot',
+                data: { appid: '小骚', userid: 'k9KfTaLj', spoken: text },
+                success: (res) => {
+                    let msg = res.data.info.text;
+                    $('section').append('<span class="robot">' + msg + '</span>');
+                }
+            });
+        })
+    })
+</script>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('GET','http://www.liulongbin.top:3006/api/getbooks?id=1')
+    // xhr.send()
+    // xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         console.log(xhr.responseText);
+    //     }
+    // }
+    // xhr对象readyState属性
+    // 0 对象已被创建 未调用open
+    // 1 open方法被调用
+    // 2 send方法被调用 响应头已被接收
+    // 3 数据接收中 response属性包含部分数据
+    // 4 请求完成 数据传输彻底完成或失败
+
+
+    // URL编码
+    console.log(encodeURI('假面骑士'));
+    console.log(decodeURI('%E3%81%87 %E9%9D%A3'));
+
+
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','http://www.liulongbin.top:3006/api/addbook')
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+    xhr.send('bookname=假面骑士&author=石森&publisher=东映')
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+        }
+    }
+</script>
+
+</html>

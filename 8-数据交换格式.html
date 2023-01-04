@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // JSON 本质是字符串 更小更快更易解析
+    // 对象数组相互嵌套
+    // key必须用英文双引号包裹的字符串 value为数字,字符串,bool,null,数组，对象
+
+
+    var obj = {a:'hello',b:'world'}
+    var jsonStr = '{"a":"hello","b":"world"}'
+    console.log(JSON.parse(jsonStr));
+    console.log(JSON.stringify(obj));
+
+
+
+</script>
+</html>
